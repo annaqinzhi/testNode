@@ -1,8 +1,29 @@
-const express = require('express');
-const app = express();
+/**
+ * Responds to any HTTP request.
+ *
+ * @param {!express:Request} req HTTP request context.
+ * @param {!express:Response} res HTTP response context.
+ */
+exports.calculateAge = (req, res) => {
+  const tag = req.body.fulfillmentInfo.tag;
+  let message = tag || req.query.message || req.body.message || 'Hello World!';
+  if (req.body.sessionInfo.parameters.age){
+    message = "if you were 10 years older, you would be "+ (req.body.sessionInfo.parameters.age+10);
+  }
 
-app.get('/', (req, res) => {
-  res.send('hello, world');
-});
+  const jsonResponse = {
+      fulfillment_response: {
+        messages: [
+          {
+            text: {
+              //fulfillment text response to be sent to the agent
+              text: [message],
+            },
+          },
+        ],
+      },
 
-app.listen(process.env.PORT || 8080);
+  };
+  
+  res.status(200).send(jsonResponse);
+};
