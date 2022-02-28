@@ -1,4 +1,9 @@
-
+/**
+ * Responds to any HTTP request.
+ *
+ * @param {!express:Request} req HTTP request context.
+ * @param {!express:Response} res HTTP response context.
+ */
 exports.calculateAge = (req, res) => {
   const tag = req.body.fulfillmentInfo.tag;
   let message = tag || req.query.message || req.body.message || 'Hello World!';
