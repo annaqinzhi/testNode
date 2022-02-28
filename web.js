@@ -24,6 +24,7 @@ exports.calculateAge = (req, res) => {
       },
 
   };
+  
   res.status(200).send(jsonResponse);
-});
+};
 
