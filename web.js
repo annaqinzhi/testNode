@@ -7,7 +7,7 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
   let message = "Hello World!";
   if (req.body.sessionInfo.parameters.age){
     message = "if you were 10 years older, you would be "+ (req.body.sessionInfo.parameters.age+10);
