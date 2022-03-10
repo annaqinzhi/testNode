@@ -1,22 +1,22 @@
-/**
- * Responds to any HTTP request.
- *
- * @param {!express:Request} req HTTP request context.
- * @param {!express:Response} res HTTP response context.
- */
-const express = require('express');
-const app = express();
 
-app.post('/', (req, res) => {
-  let message = "Hello World!";
-  if (req.body.sessionInfo.parameters.age){
-    message = "if you were 10 years older, you would be "+ (req.body.sessionInfo.parameters.age+10);
-  }
- 
-  
-  res.status(200).send(message);
-  
-});
+const express = require('express')
+// will use this later to send requests
+const http = require('http')
+// import env variables
+require('dotenv').config()
 
-app.listen(process.env.PORT || 8080);
+const app = express()
+const port = process.env.PORT || 3000
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+app.get('/', (req, res) => {
+	res.status(200).send('Server is working.')
+})
+
+app.listen(port, () => {
+	console.log(`🌏 Server is running at http://localhost:${port}`)
+})
+
 
