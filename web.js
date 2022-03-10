@@ -21,22 +21,10 @@ app.post('/getage', (req, res) => {
 	  let message = tag || req.query.message || req.body.message || 'Hello World!';
 	  if (req.body.sessionInfo.parameters.ageinput){
 	    message = "if you were 10 years older, you would be "+ (req.body.sessionInfo.parameters.ageinput+10);
+		 
 	  }
 
-	  const jsonResponse = {
-	      fulfillment_response: {
-		messages: [
-		  {
-		    text: {
-		      //fulfillment text response to be sent to the agent
-		      text: [message],
-		    },
-		  },
-		],
-	      },
-
-	  };
-
-	  res.status(200).send(jsonResponse);
+          res.status(200).send(message);
+  
 })
 
