@@ -23,9 +23,9 @@ app.post('/getage', (req, res) => {
 		req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.movie
 			? req.body.result.parameters.movie
 			: ''
-        let API_KEY="73b3e3a";
+      
 	const reqUrl = encodeURI(
-		`http://www.omdbapi.com/?t=${movieToSearch}&apikey=${API_KEY}`
+		`http://www.omdbapi.com/?t=${movieToSearch}&apikey=73b3e3a`
 	)
 	http.get(
 		reqUrl,
