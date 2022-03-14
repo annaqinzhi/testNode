@@ -18,7 +18,7 @@ app.listen(port, () => {
 	console.log(`🌏 Server is running`)
 })
 
-app.post('/getage', (req, res) => {
+app.post('/getmovie', (req, res) => {
           const movieToSearch =
 		req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.movie
 			? req.body.result.parameters.movie
