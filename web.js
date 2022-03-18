@@ -18,40 +18,27 @@ app.listen(port, () => {
 	console.log(`🌏 Server is running`)
 })
 
-app.post('/getmovie', (req, res) => {
-          const movieToSearch =
-		req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.movie
-			? req.body.result.parameters.movie
-			: ''
-      
-	const reqUrl = encodeURI(
-		`http://www.omdbapi.com/?t=${movieToSearch}&apikey=73b3e3a`
-	)
-	http.get(
-		reqUrl,
-		responseFromAPI => {
-			let completeResponse = ''
-			responseFromAPI.on('data', chunk => {
-				completeResponse += chunk
-			})
-			responseFromAPI.on('end', () => {
-				const movie = JSON.parse(completeResponse)
+app.post('/post', function (req, res) {
+  const tag = req.body.fulfillmentInfo.tag;
+  let message = tag || req.query.message || req.body.message || 'Hello World!';
+  if (req.body.sessionInfo.parameters.age){
+    message = "if you were 10 years older, you would be "+ (req.body.sessionInfo.parameters.age+10);
+  }
+	
+     const jsonResponse = {
+      fulfillment_response: {
+        messages: [
+          {
+            text: {
+              //fulfillment text response to be sent to the agent
+              text: [message],
+            },
+          },
+        ],
+      },
 
-				let dataToSend = movieToSearch
-				dataToSend = `${movie.Title} was released in the year ${movie.Year}. It is directed by ${movie.Director} and stars ${movie.Actors}.\n Here some glimpse of the plot: ${movie.Plot}.
-                }`
-
-				return res.json({
-					fulfillmentText: dataToSend,
-					source: 'getmovie'
-				})
-			})
-		},
-		error => {
-			return res.json({
-				fulfillmentText: 'Could not get results at this time',
-				source: 'getmovie'
-			})
-		}
-	)
+  };
+	
+  console.log("test Post tag" + tag);
+  res.status(200).send(jsonResponse);
 })
