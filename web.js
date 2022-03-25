@@ -5,7 +5,7 @@ const http = require('http')
 require('dotenv').config()
 
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 3000
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -18,7 +18,7 @@ app.listen(port, () => {
 	console.log(`🌏 Server is running`)
 })
 
-app.post('/post', function (req, res) {
+app.post('/', function (req, res) {
   const tag = req.body.fulfillmentInfo.tag;
   let message = tag || req.query.message || req.body.message || 'Hello World!';
   if (req.body.sessionInfo.parameters.age){
