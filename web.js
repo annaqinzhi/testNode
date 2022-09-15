@@ -27,7 +27,7 @@ let message = req.query.message || req.body.message || 'Hello World!';
         messages: [
           {
             text: {
-              //fulfillment text response to be sent to the agent
+              //fulfillment text response to be sent to the agent AAAAAAA ANNA UPDATE FOR TEST
               text: [message],
             },
           },
